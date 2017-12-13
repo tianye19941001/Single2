@@ -1,0 +1,18 @@
+{
+  "env": {
+    "test": {
+        "presets": ["es2015"],
+        "plugins": [
+            "transform-async-to-generator",
+            "syntax-async-functions",
+            ["transform-runtime",
+		    {
+		      "helpers": false,
+		      "polyfill": false,
+		      "regenerator": true,
+		      "moduleName": "babel-runtime"
+		    }]
+        ]
+    }
+  }
+}
