@@ -5,6 +5,7 @@
  */
 
 var app = require('../app');
+var allScockets = require('../routes/allSockets');
 var debug = require('debug')('demo:server');
 var http = require('http');
 
@@ -20,6 +21,7 @@ var port = normalizePort(process.env.PORT || '3000');
  */
 
 var server = http.createServer(app.callback());
+var io = require('socket.io')(server)
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -29,6 +31,9 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+io.on('connection', function (socket) {
+  return allScockets(io, socket);
+});
 /**
  * Normalize a port into a number, string, or false.
  */
