@@ -2,14 +2,14 @@
 * @Author: yuanye
 * @Date:   2017-12-14 15:02:42
 * @Last Modified by:   yuanye
-* @Last Modified time: 2017-12-15 18:37:46
+* @Last Modified time: 2017-12-15 18:53:46
 */
 
 const player = { count: 0 };
 
 const allSockets = (io, socket) =>{
   player.count++;
-  player.name = 'player' + player.count;
+  player.name = 'p' + player.count;
   
   io.emit('connects', { name: player.name, type: 'enter' });
 
