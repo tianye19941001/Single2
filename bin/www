@@ -20,8 +20,18 @@ var port = normalizePort(process.env.PORT || '3000');
  * Create HTTP server.
  */
 
+/**
+ * Add WebSocket server
+ */
+
 var server = http.createServer(app.callback());
 var io = require('socket.io')(server)
+
+/**
+ * Add mongodb connection
+ */
+
+ var mongoose = require('mongoose').connect('mongodb://127.0.0.1:27017/Single')
 
 /**
  * Listen on provided port, on all network interfaces.

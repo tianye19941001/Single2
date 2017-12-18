@@ -4,6 +4,7 @@ const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
+const session = require("koa-session2")
 const logger = require('koa-logger')
 
 const index = require('./routes/index')
@@ -33,6 +34,11 @@ app.use(async (ctx, next) => {
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
+
+// session
+app.use(session({
+    key: "SESSIONID",   //default "koa:sid"
+}));
 
 // routes
 app.use(res_format('^/api'))
