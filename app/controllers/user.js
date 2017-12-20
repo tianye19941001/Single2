@@ -14,6 +14,9 @@ exports.getUser = async (ctx, next) => {
 }
 
 exports.registerUser = async (ctx, next) => {
-	const _user = ctx.body;
-	console.log(ctx)
+	const _user = JSON.parse(ctx.request.body);
+	console.log(_user.name)
+	ctx.body = {
+		test: _user
+	};
 }

@@ -1826,6 +1826,10 @@ koa2-cookie-session@^0.0.1:
   version "0.0.1"
   resolved "https://npm.hlj.team/koa2-cookie-session/-/koa2-cookie-session-0.0.1.tgz#03d37a72867c5ad171a5ca57879db945b2040f48"
 
+koa2-cors@^2.0.5:
+  version "2.0.5"
+  resolved "https://npm.hlj.team/koa2-cors/-/koa2-cors-2.0.5.tgz#3404712cd092f728c7f72de704ee7b920d957658"
+
 koa@^2.2.0:
   version "2.4.1"
   resolved "https://npm.hlj.team/koa/-/koa-2.4.1.tgz#d449cfb970a7e9da571f699eda40bb9e32eb1484"
