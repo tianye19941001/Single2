@@ -15,8 +15,17 @@ exports.getUser = async (ctx, next) => {
 
 exports.registerUser = async (ctx, next) => {
 	const _user = JSON.parse(ctx.request.body);
-	console.log(_user.name)
-	ctx.body = {
-		test: _user
-	};
+    const ctxBody = {user: _user.name, registerUser};
+	await User.findOne({name: _user.name}, async (err, user) => {
+        if (err) new ApiError(ApiErrorNames.USER_NOT_FOUND);
+        if (user) {
+            ctxBody.registerUser = false;
+        }else {
+            const user = new User(_user);
+            user.save((err, user) => {
+                if (err) new ApiError(ApiErrorNames.USER_NOT_FOUND);
+            })
+        }
+    })
+    ctx.body = ctxBody;
 }

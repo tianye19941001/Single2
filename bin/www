@@ -31,8 +31,8 @@ var io = require('socket.io')(server)
  * Add mongodb connection
  */
 
- var mongoose = require('mongoose').connect('mongodb://127.0.0.1:27017/Single')
-
+var mongoose = require('mongoose').connect('mongodb://127.0.0.1:27017/Single')
+mongoose.Promise = global.Promise
 /**
  * Listen on provided port, on all network interfaces.
  */
