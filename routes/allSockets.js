@@ -2,29 +2,30 @@
 * @Author: yuanye
 * @Date:   2017-12-14 15:02:42
 * @Last Modified by:   yuanye
-* @Last Modified time: 2017-12-18 16:10:23
+* @Last Modified time: 2018-01-05 15:57:58
 */
 
 const player = { count: 0 };
 
 const allSockets = (io, socket) =>{
-  player.count++;
-  player.name = 'P' + player.count;
-  
-  io.emit('connects', { name: player.name, type: 'enter'});
 
-  socket.on('message', function (str) {
-    io.emit('message', { name: player.name, word: str, id: socket.id });
+  const playerName = socket.handshake.query.player;
+
+  if (playerName && playerName != '' && playerName != 'undefined') {
+    socket.nickName = playerName
+  } else {
+    socket.nickName = 'P' + player.count++;
+  }
+
+  io.emit('connects', { name: socket.nickName, type: 'enter'});
+
+  socket.on('message', (str) => {
+    io.emit('message', { name: socket.nickName, word: str, id: socket.id });
   });
 
-  socket.on('disconnect', function(str) {
-  	io.emit('disconnect', { name: player.name, type: 'leave'});
+  socket.on('disconnect', (str) => {
+  	io.emit('disconnect', { name: socket.nickName, type: 'leave'});
   });
-
-  socket.on('changeName', function(str) {
-  	player.name = str;
-  	socket.emit('changeName', '名字已经换成：' + str );
-  })
 }
 
  module.exports = allSockets;

@@ -2,10 +2,10 @@ const Koa = require('koa')
 const app = new Koa()
 const views = require('koa-views')
 const json = require('koa-json')
-const cors = require('koa2-cors');
+const cors = require('koa2-cors')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
-const session = require("koa-session2")
+const session = require("koa-session")
 const logger = require('koa-logger')
 
 const index = require('./routes/index')
@@ -52,9 +52,19 @@ app.use(cors({
 }))
 
 // session
-app.use(session({
-    key: "SESSIONID",   //default "koa:sid"
-}));
+const CONFIG = {
+  key: 'koa:sess', /** (string) cookie key (default is koa:sess) */
+  /** (number || 'session') maxAge in ms (default is 1 days) */
+  /** 'session' will result in a cookie that expires when session/browser is closed */
+  /** Warning: If a session cookie is stolen, this cookie will never expire */
+  maxAge: 86400000,
+  overwrite: true, /** (boolean) can overwrite or not (default true) */
+  httpOnly: true, /** (boolean) httpOnly or not (default true) */
+  signed: true, /** (boolean) signed or not (default true) */
+  rolling: false, /** (boolean) Force a session identifier cookie to be set on every response. The expiration is reset to the original maxAge, resetting the expiration countdown. default is false **/
+};
+
+app.use(session(CONFIG, app));
 
 // routes
 app.use(res_format('^/api'))
