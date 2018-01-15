@@ -16,6 +16,8 @@ const res_format = require('./middlewares/res_format')
 // error handler
 onerror(app)
 
+app.keys = ['some secret hurr'];
+
 // middlewares
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
