@@ -7,8 +7,6 @@ exports.getUser = async (ctx, next) => {
     // if(ctx.query.id != 1){
     //     throw new ApiError(ApiErrorNames.USER_NOT_EXIST);
     // }
-    ctx.session.user = 11111;
-    
     console.log(ctx.session)
 
     ctx.body = {name: 1111, session: ctx.session.user}
@@ -30,6 +28,5 @@ exports.registerUser = async (ctx, next) => {
         }
     })
     console.log(ctx.session)
-    console.log(1111111111)
     ctx.body = ctxBody;
 }

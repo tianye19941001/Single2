@@ -5,7 +5,8 @@ const json = require('koa-json')
 const cors = require('koa2-cors')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
-const session = require("koa-session")
+const session = require('koa-generic-session')
+const MongoStore = require('koa-generic-session-mongo')
 const logger = require('koa-logger')
 
 const index = require('./routes/index')
@@ -16,7 +17,7 @@ const res_format = require('./middlewares/res_format')
 // error handler
 onerror(app)
 
-app.keys = ['some secret hurr'];
+app.keys = ['keys', 'keykeys'];
 
 // middlewares
 app.use(bodyparser({
@@ -44,7 +45,7 @@ app.use(cors({
         if (ctx.url === '/test') {
             return "*"; // 允许来自所有域名请求
         }
-        return 'http://172.16.118.200:8080'; // 这样就能只允许 http://localhost:8080 这个域名的请求了
+        return 'http://172.16.119.217:8080'; // 这样就能只允许 http://localhost:8080 这个域名的请求了
     },
     exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
     maxAge: 5,
