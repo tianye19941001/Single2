@@ -7,7 +7,6 @@ exports.getUser = async (ctx, next) => {
     // if(ctx.query.id != 1){
     //     throw new ApiError(ApiErrorNames.USER_NOT_EXIST);
     // }
-
     ctx.body = {name: 1111, session: ctx.session.user}
 }
 
